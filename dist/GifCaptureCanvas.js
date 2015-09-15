@@ -6,14 +6,12 @@ var GifCaptureCanvas = (function () {
         this.durationSec = 3;
         this.fps = 20;
         this.scale = 0.5;
-        this.width = 640;
-        this.height = 480;
         this.keyCode = 67; // 'C'
         this.index = 0;
     }
     GifCaptureCanvas.prototype.capture = function (element) {
         if (!this.contexts) {
-            this.begin();
+            this.begin(element);
         }
         this.contexts[this.index].drawImage(element, 0, 0);
         this.isCaptured[this.index] = true;
@@ -22,13 +20,13 @@ var GifCaptureCanvas = (function () {
             this.index = 0;
         }
     };
-    GifCaptureCanvas.prototype.begin = function () {
+    GifCaptureCanvas.prototype.begin = function (element) {
         var _this = this;
         this.contextsNum = this.durationSec * this.fps;
         this.contexts = _.times(this.contextsNum, function () {
             var cvs = document.createElement('canvas');
-            cvs.width = _this.width * _this.scale;
-            cvs.height = _this.height * _this.scale;
+            cvs.width = element.width * _this.scale;
+            cvs.height = element.height * _this.scale;
             var ctx = cvs.getContext('2d');
             ctx.scale(_this.scale, _this.scale);
             return ctx;

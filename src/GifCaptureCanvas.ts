@@ -9,8 +9,6 @@ class GifCaptureCanvas {
 	durationSec = 3;
 	fps = 20;
 	scale = 0.5;
-	width = 640;
-	height = 480;
 	keyCode = 67; // 'C'
 	
 	contextsNum: number;
@@ -22,7 +20,7 @@ class GifCaptureCanvas {
 
 	capture(element: any) {
 		if (!this.contexts) {
-			this.begin();
+			this.begin(element);
 		}
 		this.contexts[this.index].drawImage(element, 0, 0);
 		this.isCaptured[this.index] = true;
@@ -32,12 +30,12 @@ class GifCaptureCanvas {
 		}
 	}
 
-	begin() {
+	begin(element: any) {
 		this.contextsNum = this.durationSec * this.fps;
 		this.contexts = _.times(this.contextsNum, () => {
 			var cvs = document.createElement('canvas');
-			cvs.width = this.width * this.scale;
-			cvs.height = this.height * this.scale;
+			cvs.width = element.width * this.scale;
+			cvs.height = element.height * this.scale;
 			var ctx = cvs.getContext('2d');
 			ctx.scale(this.scale, this.scale);
 			return ctx;

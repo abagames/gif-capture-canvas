@@ -27,10 +27,6 @@ window.onload = () => {
 	// set a scaling of a capturing screen size
 	// default: 0.5
 	gifCaptureCanvas.scale = 0.5;
-	// set a size of the capturing canvas
-	// default: 640 x 480
-	gifCaptureCanvas.width = 256;
-	gifCaptureCanvas.height = 256;
 	// set a keycode of a capturing key
 	// default: 67 ('C')
 	gifCaptureCanvas.keyCode = 67;

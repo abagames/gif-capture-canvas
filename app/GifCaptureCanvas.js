@@ -61,3 +61,4 @@ var GifCaptureCanvas = (function () {
     };
     return GifCaptureCanvas;
 })();
+//# sourceMappingURL=GifCaptureCanvas.js.map

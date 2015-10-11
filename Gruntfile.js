@@ -2,7 +2,7 @@ module.exports = function (grunt) {
     grunt.initConfig({
         esteWatch: {
             options: {
-                dirs: ['dist', 'src/**'],
+                dirs: ['app', 'src/**'],
                 livereload: {
                     enabled: true,
                     extensions: ['js', 'html', 'css']
@@ -13,12 +13,20 @@ module.exports = function (grunt) {
             },
         },
         typescript: {
-            base: {
+            demo: {
                 src: ['src/**/*.ts'],
-                dest: 'dist/',
+                dest: 'app/',
                 options: {
                     target: 'es5',
                     sourceMap: true
+                }
+            },
+            dist: {
+                src: ['src/*.ts'],
+                dest: 'dist/',
+                options: {
+                    target: 'es5',
+                    sourceMap: false
                 }
             }
         }

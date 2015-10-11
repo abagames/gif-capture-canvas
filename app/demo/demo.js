@@ -1,4 +1,4 @@
-/// <reference path='GifCaptureCanvas.ts' />
+/// <reference path='../GifCaptureCanvas.ts' />
 var gifCaptureCanvas;
 var canvas;
 var context;

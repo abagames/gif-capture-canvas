@@ -10,6 +10,7 @@ Capture a canvas with an anmiated gif.
 * Include libraries to HTML.
 
 ```html
+    <script src="libs/lodash/lodash.custom.min.js"></script>
     <script src="libs/GIFEncoder/LZWEncoder.js"></script>
     <script src="libs/GIFEncoder/NeuQuant.js"></script>
     <script src="libs/GIFEncoder/b64.js"></script>

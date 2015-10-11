@@ -3,10 +3,11 @@
 
 declare class GifCaptureCanvas {
 	durationSec: number;
-	fps: number;
 	scale: number;
 	keyCode: number;
 	
 	constructor();
+	setFps(capturingFps?: number, appFps?: number);
 	capture(element: any);
+	end();
 }

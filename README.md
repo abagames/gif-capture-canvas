@@ -20,6 +20,8 @@ Capture a canvas with an anmiated gif.
 
 * Construct GifCaptureCanvas.
 
+see: [src/demo/demo.ts](https://github.com/abagames/GifCaptureCanvas/blob/master/src/demo/demo.ts)
+
 ```ts
 	gifCaptureCanvas = new GifCaptureCanvas();
 ```
@@ -27,11 +29,8 @@ Capture a canvas with an anmiated gif.
 * Capture HTMLCanvasElement.
 
 ```ts
-	// since the capturing fps = 20,
-	// the canvas should be captured once per 3 (60/20) frames
-	if (ticks % 3 == 0) {
-		gifCaptureCanvas.capture(canvas);
-	}
+	// capture the canvas
+	gifCaptureCanvas.capture(canvas);
 ```
 
 * Push the capturing key (default: 'C') to output an animated gif.
@@ -39,12 +38,12 @@ Capture a canvas with an anmiated gif.
 #### Configuration
 
 ```ts
+	// set a capturing fps
+	// default: (capturing: 20 fps, app: 60 fps)
+	gifCaptureCanvas.setFps(20, 60);
 	// set a capturing time duration (seconds.)
 	// default: 3 seconds
 	gifCaptureCanvas.durationSec = 3;
-	// set a capturing fps
-	// default: 20 fps
-	gifCaptureCanvas.fps = 20;
 	// set a scaling of a capturing screen size
 	// default: 0.5
 	gifCaptureCanvas.scale = 0.5;

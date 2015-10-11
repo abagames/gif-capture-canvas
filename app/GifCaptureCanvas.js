@@ -4,12 +4,27 @@
 var GifCaptureCanvas = (function () {
     function GifCaptureCanvas() {
         this.durationSec = 3;
-        this.fps = 20;
         this.scale = 0.5;
         this.keyCode = 67; // 'C'
         this.index = 0;
+        this.capturingFps = 20;
+        this.appFps = 60;
+        this.capturePerFrame = 3; // 60 / 20
+        this.frameCount = 0;
     }
+    GifCaptureCanvas.prototype.setFps = function (capturingFps, appFps) {
+        if (capturingFps === void 0) { capturingFps = 20; }
+        if (appFps === void 0) { appFps = 60; }
+        this.capturingFps = capturingFps;
+        this.appFps = appFps;
+        this.capturePerFrame = this.appFps / this.capturingFps;
+    };
     GifCaptureCanvas.prototype.capture = function (element) {
+        this.frameCount++;
+        if (this.frameCount < this.capturePerFrame) {
+            return;
+        }
+        this.frameCount -= this.capturePerFrame;
         if (!this.contexts) {
             this.begin(element);
         }
@@ -22,7 +37,7 @@ var GifCaptureCanvas = (function () {
     };
     GifCaptureCanvas.prototype.begin = function (element) {
         var _this = this;
-        this.contextsNum = this.durationSec * this.fps;
+        this.contextsNum = this.durationSec * this.capturingFps;
         this.contexts = _.times(this.contextsNum, function () {
             var cvs = document.createElement('canvas');
             cvs.width = element.width * _this.scale;
@@ -42,7 +57,7 @@ var GifCaptureCanvas = (function () {
         var _this = this;
         var encoder = new GIFEncoder();
         encoder.setRepeat(0);
-        encoder.setDelay(1000 / this.fps);
+        encoder.setDelay(1000 / this.capturingFps);
         encoder.start();
         var idx = this.index;
         _.times(this.contextsNum, function () {

@@ -18,12 +18,12 @@ window.onload = () => {
 	context.fillStyle = '#fff';
 	context.fillRect(0, 0, 256, 256);
 	gifCaptureCanvas = new GifCaptureCanvas();
+	// set a capturing fps
+	// default: (capturing: 20 fps, app: 60 fps)
+	gifCaptureCanvas.setFps(20, 60);
 	// set a capturing time duration (seconds.)
 	// default: 3 seconds
 	gifCaptureCanvas.durationSec = 3;
-	// set a capturing fps
-	// default: 20 fps
-	gifCaptureCanvas.fps = 20;
 	// set a scaling of a capturing screen size
 	// default: 0.5
 	gifCaptureCanvas.scale = 0.5;
@@ -55,11 +55,8 @@ function update() {
 	if (y < 0 || y > 256) {
 		mvy *= -1;
 	}
-	// since the capturing fps = 20,
-	// the canvas should be captured once per 3 (60/20) frames
-	if (ticks % 3 == 0) {
-		gifCaptureCanvas.capture(canvas);
-	}
+	// capture the canvas
+	gifCaptureCanvas.capture(canvas);
 	ticks++;
 }
 

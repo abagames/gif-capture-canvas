@@ -5,8 +5,6 @@ declare class GifCaptureCanvas {
 	durationSec: number;
 	fps: number;
 	scale: number;
-	width: number;
-	height: number;
 	keyCode: number;
 	
 	constructor();

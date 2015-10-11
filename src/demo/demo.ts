@@ -40,9 +40,9 @@ window.onload = () => {
 function update() {
 	requestAnimationFrame(update);
 	context.strokeStyle = '#' +
-		Math.floor(Math.sin(ticks * 0.01) * 4 + 5) +
-		Math.floor(Math.cos(ticks * 0.015) * 4 + 5) +
-		Math.floor(Math.sin(ticks * 0.018) * 4 + 5);
+	Math.floor(Math.sin(ticks * 0.01) * 4 + 5) +
+	Math.floor(Math.cos(ticks * 0.015) * 4 + 5) +
+	Math.floor(Math.sin(ticks * 0.018) * 4 + 5);
 	context.beginPath();
 	context.moveTo(128, 128);
 	context.lineTo(x, y);

@@ -9,5 +9,6 @@ declare class GifCaptureCanvas {
 	constructor();
 	setFps(capturingFps?: number, appFps?: number);
 	capture(element: any);
+	captureSvg(svgElm: any);
 	end();
 }

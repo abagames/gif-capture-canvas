@@ -18,13 +18,14 @@ class GifCaptureCanvas {
 	appFps = 60;
 	capturePerFrame = 3; // 60 / 20
 	frameCount = 0;
+	image = new Image();
 
 	constructor() { }
-	
+
 	setFps(capturingFps: number = 20, appFps: number = 60) {
 		this.capturingFps = capturingFps;
 		this.appFps = appFps;
-		this.capturePerFrame =  this.appFps / this.capturingFps;
+		this.capturePerFrame = this.appFps / this.capturingFps;
 	}
 
 	capture(element: any) {
@@ -42,6 +43,16 @@ class GifCaptureCanvas {
 		if (this.index >= this.contextsNum) {
 			this.index = 0;
 		}
+	}
+
+	captureSvg(svgElm: any) {
+		if (this.frameCount + 1 < this.capturePerFrame) {
+			this.frameCount++;
+			return;
+		}
+		var svgXml = new XMLSerializer().serializeToString(svgElm);
+		this.image.src = "data:image/svg+xml;base64," + btoa(svgXml);
+		this.capture(this.image);
 	}
 
 	begin(element: any) {

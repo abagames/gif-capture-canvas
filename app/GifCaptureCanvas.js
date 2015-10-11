@@ -11,6 +11,7 @@ var GifCaptureCanvas = (function () {
         this.appFps = 60;
         this.capturePerFrame = 3; // 60 / 20
         this.frameCount = 0;
+        this.image = new Image();
     }
     GifCaptureCanvas.prototype.setFps = function (capturingFps, appFps) {
         if (capturingFps === void 0) { capturingFps = 20; }
@@ -34,6 +35,15 @@ var GifCaptureCanvas = (function () {
         if (this.index >= this.contextsNum) {
             this.index = 0;
         }
+    };
+    GifCaptureCanvas.prototype.captureSvg = function (svgElm) {
+        if (this.frameCount + 1 < this.capturePerFrame) {
+            this.frameCount++;
+            return;
+        }
+        var svgXml = new XMLSerializer().serializeToString(svgElm);
+        this.image.src = "data:image/svg+xml;base64," + btoa(svgXml);
+        this.capture(this.image);
     };
     GifCaptureCanvas.prototype.begin = function (element) {
         var _this = this;

@@ -90,7 +90,8 @@ class GifCaptureCanvas {
 		});
 		encoder.finish();
 		var binaryGif = encoder.stream().getData();
-		window.location.href =
-		'data:image/gif;base64,' + encode64(binaryGif);
+		var imgElement = document.createElement('img');
+		imgElement.src = 'data:image/gif;base64,' + encode64(binaryGif);
+		document.getElementsByTagName('body')[0].appendChild(imgElement);
 	}
 }

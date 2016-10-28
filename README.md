@@ -1,61 +1,45 @@
-GifCaptureCanvas
+gif-capture-canvas
 ======================
 
-Capture a canvas with an anmiated gif.
+Capture a canvas with an animated gif.
 
 ![demo](http://abagames.sakura.ne.jp/15/GifCaptureCanvas/demo.gif)
 
+See [the demo](https://abagames.github.io/gif-capture-canvas/).
+
 ### Usage
 
-* Include libraries to HTML.
+* Include the library.
 
 ```html
-    <script src="libs/lodash/lodash.custom.min.js"></script>
-    <script src="libs/GIFEncoder/LZWEncoder.js"></script>
-    <script src="libs/GIFEncoder/NeuQuant.js"></script>
-    <script src="libs/GIFEncoder/b64.js"></script>
-    <script src="libs/GIFEncoder/GIFEncoder.js"></script>
-    <script src="GifCaptureCanvas.js"></script>
-```
-
-* Construct GifCaptureCanvas.
-
-see: [src/demo/demo.ts](https://github.com/abagames/GifCaptureCanvas/blob/master/src/demo/demo.ts)
-
-```ts
-	gifCaptureCanvas = new GifCaptureCanvas();
+  <script src="docs/libs/gcc/index.js"></script>
 ```
 
 * Capture HTMLCanvasElement.
 
-```ts
+see: [src/sample/index.ts](https://github.com/abagames/gif-capture-canvas/blob/master/src/sample/index.ts)
+
+```js
 	// capture the canvas
-	gifCaptureCanvas.capture(canvas);
+	gcc.capture(canvas);
 ```
 
 * Push the capturing key (default: 'C') to output an animated gif.
 
 #### Configuration
 
-```ts
-	// set a capturing fps
-	// default: (capturing: 20 fps, app: 60 fps)
-	gifCaptureCanvas.setFps(20, 60);
-	// set a capturing time duration (seconds.)
-	// default: 3 seconds
-	gifCaptureCanvas.durationSec = 3;
-	// set a scaling of a capturing screen size
-	// default: 0.5
-	gifCaptureCanvas.scale = 0.5;
-	// set a keycode of a capturing key
-	// default: 67 ('C')
-	gifCaptureCanvas.keyCode = 67;
+```js
+  // set options (default values are shown below)
+  gcc.setOptions({
+    scale: 0.5,
+    durationSec: 3,
+    keyCode: 67, // 'C'
+    capturingFps: 20,
+    appFps: 60,
+    isAppendingImgElement: true
+  });
 ```
 
 ### Acknowledgement
 
 [jsgif](https://github.com/antimatter15/jsgif)
-
-License
-----------
-MIT

@@ -63,7 +63,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	"use strict";
 	var GIFEncoder = __webpack_require__(2);
-	var options = {
+	exports.options = {
 	    scale: 0.5,
 	    durationSec: 3,
 	    keyCode: 67,
@@ -79,7 +79,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	var image = new Image();
 	function capture(element) {
 	    frameCount++;
-	    var capturePerFrame = options.appFps / options.capturingFps;
+	    var capturePerFrame = exports.options.appFps / exports.options.capturingFps;
 	    if (frameCount < capturePerFrame) {
 	        return;
 	    }
@@ -96,7 +96,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	}
 	exports.capture = capture;
 	function captureSvg(svgElm) {
-	    var capturePerFrame = options.appFps / options.capturingFps;
+	    var capturePerFrame = exports.options.appFps / exports.options.capturingFps;
 	    if (frameCount + 1 < capturePerFrame) {
 	        frameCount++;
 	        return;
@@ -107,18 +107,18 @@ return /******/ (function(modules) { // webpackBootstrap
 	}
 	exports.captureSvg = captureSvg;
 	function begin(element) {
-	    contextsNum = options.durationSec * options.capturingFps;
+	    contextsNum = exports.options.durationSec * exports.options.capturingFps;
 	    contexts = times(contextsNum, function () {
 	        var cvs = document.createElement('canvas');
-	        cvs.width = element.width * options.scale;
-	        cvs.height = element.height * options.scale;
+	        cvs.width = element.width * exports.options.scale;
+	        cvs.height = element.height * exports.options.scale;
 	        var ctx = cvs.getContext('2d');
-	        ctx.scale(options.scale, options.scale);
+	        ctx.scale(exports.options.scale, exports.options.scale);
 	        return ctx;
 	    });
 	    isCaptured = times(contextsNum, function () { return false; });
 	    document.addEventListener('keydown', function (e) {
-	        if (e.keyCode == options.keyCode) {
+	        if (e.keyCode == exports.options.keyCode) {
 	            end();
 	        }
 	    });
@@ -126,7 +126,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	function end() {
 	    var encoder = new GIFEncoder();
 	    encoder.setRepeat(0);
-	    encoder.setDelay(1000 / options.capturingFps);
+	    encoder.setDelay(1000 / exports.options.capturingFps);
 	    encoder.start();
 	    var idx = index;
 	    times(contextsNum, function () {
@@ -142,7 +142,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    var binaryGif = encoder.stream().getData();
 	    var imgElement = document.createElement('img');
 	    imgElement.src = 'data:image/gif;base64,' + encode64(binaryGif);
-	    if (options.isAppendingImgElement) {
+	    if (exports.options.isAppendingImgElement) {
 	        document.getElementsByTagName('body')[0].appendChild(imgElement);
 	    }
 	    return imgElement;
@@ -157,7 +157,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	}
 	function setOptions(_options) {
 	    for (var attr in _options) {
-	        options[attr] = _options[attr];
+	        exports.options[attr] = _options[attr];
 	    }
 	}
 	exports.setOptions = setOptions;

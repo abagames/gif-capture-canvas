@@ -1,7 +1,7 @@
 declare const require: any;
 const GIFEncoder = require('jsgif');
 
-let options = {
+export let options = {
   scale: 0.5,
   durationSec: 3,
   keyCode: 67, // 'C'

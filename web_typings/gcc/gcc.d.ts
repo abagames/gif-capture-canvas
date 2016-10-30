@@ -4,6 +4,8 @@ declare module 'gcc' {
 	function end(): HTMLImageElement;
 	function setOptions(_options: Options);
 
+	export let options: Options;
+
 	interface Options {
 		scale?: number;
 		durationSec?: number;

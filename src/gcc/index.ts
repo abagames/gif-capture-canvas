@@ -15,6 +15,7 @@ let isCaptured: boolean[];
 let index = 0;
 let frameCount = 0;
 let image = new Image();
+let isInfiniteDuration = false;
 
 export function capture(element: any) {
   frameCount++;
@@ -26,10 +27,15 @@ export function capture(element: any) {
   if (!contexts) {
     begin(element);
   }
+  if (isInfiniteDuration) {
+    contexts.push(createContext(element));
+  }
   contexts[index].drawImage(element, 0, 0);
-  isCaptured[index] = true;
+  if (!isInfiniteDuration) {
+    isCaptured[index] = true;
+  }
   index++;
-  if (index >= contextsNum) {
+  if (!isInfiniteDuration && index >= contextsNum) {
     index = 0;
   }
 }
@@ -46,16 +52,13 @@ export function captureSvg(svgElm: any) {
 }
 
 function begin(element: any) {
-  contextsNum = options.durationSec * options.capturingFps;
-  contexts = times(contextsNum, () => {
-    var cvs = document.createElement('canvas');
-    cvs.width = element.width * options.scale;
-    cvs.height = element.height * options.scale;
-    var ctx = cvs.getContext('2d');
-    ctx.scale(options.scale, options.scale);
-    return ctx;
-  });
-  isCaptured = times(contextsNum, () => false);
+  if (isInfiniteDuration) {
+    contexts = [];
+  } else {
+    contextsNum = options.durationSec * options.capturingFps;
+    contexts = times(contextsNum, () => createContext(element));
+    isCaptured = times(contextsNum, () => false);
+  }
   document.addEventListener('keydown', (e: KeyboardEvent) => {
     if (e.keyCode == options.keyCode) {
       end();
@@ -63,21 +66,36 @@ function begin(element: any) {
   });
 }
 
+function createContext(element: any) {
+  const cvs = document.createElement('canvas');
+  cvs.width = element.width * options.scale;
+  cvs.height = element.height * options.scale;
+  const ctx = cvs.getContext('2d');
+  ctx.scale(options.scale, options.scale);
+  return ctx;
+}
+
 export function end() {
   const encoder = new GIFEncoder();
   encoder.setRepeat(0);
   encoder.setDelay(1000 / options.capturingFps);
   encoder.start();
-  let idx = index;
-  times(contextsNum, () => {
-    if (isCaptured[idx]) {
-      encoder.addFrame(contexts[idx]);
-    }
-    idx++;
-    if (idx >= contextsNum) {
-      idx = 0;
-    }
-  });
+  if (isInfiniteDuration) {
+    times(index - 1, i => {
+      encoder.addFrame(contexts[i]);
+    });
+  } else {
+    let idx = index;
+    times(contextsNum, () => {
+      if (isCaptured[idx]) {
+        encoder.addFrame(contexts[idx]);
+      }
+      idx++;
+      if (idx >= contextsNum) {
+        idx = 0;
+      }
+    });
+  }
   encoder.finish();
   const binaryGif = encoder.stream().getData();
   const imgElement = document.createElement('img');
@@ -91,7 +109,7 @@ export function end() {
 function times(n: number, func: Function) {
   let result = [];
   for (let i = 0; i < n; i++) {
-    result.push(func());
+    result.push(func(i));
   }
   return result;
 }
@@ -100,6 +118,7 @@ export function setOptions(_options) {
   for (let attr in _options) {
     options[attr] = _options[attr];
   }
+  isInfiniteDuration = options.durationSec <= 0;
 }
 
 // https://github.com/antimatter15/jsgif/blob/master/b64.js

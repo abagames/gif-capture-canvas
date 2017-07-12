@@ -78,6 +78,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	var index = 0;
 	var frameCount = 0;
 	var image = new Image();
+	var isInfiniteDuration = false;
 	function capture(element) {
 	    frameCount++;
 	    var capturePerFrame = exports.options.appFps / exports.options.capturingFps;
@@ -88,10 +89,15 @@ return /******/ (function(modules) { // webpackBootstrap
 	    if (!contexts) {
 	        begin(element);
 	    }
+	    if (isInfiniteDuration) {
+	        contexts.push(createContext(element));
+	    }
 	    contexts[index].drawImage(element, 0, 0);
-	    isCaptured[index] = true;
+	    if (!isInfiniteDuration) {
+	        isCaptured[index] = true;
+	    }
 	    index++;
-	    if (index >= contextsNum) {
+	    if (!isInfiniteDuration && index >= contextsNum) {
 	        index = 0;
 	    }
 	}
@@ -108,37 +114,50 @@ return /******/ (function(modules) { // webpackBootstrap
 	}
 	exports.captureSvg = captureSvg;
 	function begin(element) {
-	    contextsNum = exports.options.durationSec * exports.options.capturingFps;
-	    contexts = times(contextsNum, function () {
-	        var cvs = document.createElement('canvas');
-	        cvs.width = element.width * exports.options.scale;
-	        cvs.height = element.height * exports.options.scale;
-	        var ctx = cvs.getContext('2d');
-	        ctx.scale(exports.options.scale, exports.options.scale);
-	        return ctx;
-	    });
-	    isCaptured = times(contextsNum, function () { return false; });
+	    if (isInfiniteDuration) {
+	        contexts = [];
+	    }
+	    else {
+	        contextsNum = exports.options.durationSec * exports.options.capturingFps;
+	        contexts = times(contextsNum, function () { return createContext(element); });
+	        isCaptured = times(contextsNum, function () { return false; });
+	    }
 	    document.addEventListener('keydown', function (e) {
 	        if (e.keyCode == exports.options.keyCode) {
 	            end();
 	        }
 	    });
 	}
+	function createContext(element) {
+	    var cvs = document.createElement('canvas');
+	    cvs.width = element.width * exports.options.scale;
+	    cvs.height = element.height * exports.options.scale;
+	    var ctx = cvs.getContext('2d');
+	    ctx.scale(exports.options.scale, exports.options.scale);
+	    return ctx;
+	}
 	function end() {
 	    var encoder = new GIFEncoder();
 	    encoder.setRepeat(0);
 	    encoder.setDelay(1000 / exports.options.capturingFps);
 	    encoder.start();
-	    var idx = index;
-	    times(contextsNum, function () {
-	        if (isCaptured[idx]) {
-	            encoder.addFrame(contexts[idx]);
-	        }
-	        idx++;
-	        if (idx >= contextsNum) {
-	            idx = 0;
-	        }
-	    });
+	    if (isInfiniteDuration) {
+	        times(index - 1, function (i) {
+	            encoder.addFrame(contexts[i]);
+	        });
+	    }
+	    else {
+	        var idx_1 = index;
+	        times(contextsNum, function () {
+	            if (isCaptured[idx_1]) {
+	                encoder.addFrame(contexts[idx_1]);
+	            }
+	            idx_1++;
+	            if (idx_1 >= contextsNum) {
+	                idx_1 = 0;
+	            }
+	        });
+	    }
 	    encoder.finish();
 	    var binaryGif = encoder.stream().getData();
 	    var imgElement = document.createElement('img');
@@ -152,7 +171,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	function times(n, func) {
 	    var result = [];
 	    for (var i = 0; i < n; i++) {
-	        result.push(func());
+	        result.push(func(i));
 	    }
 	    return result;
 	}
@@ -160,6 +179,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    for (var attr in _options) {
 	        exports.options[attr] = _options[attr];
 	    }
+	    isInfiniteDuration = exports.options.durationSec <= 0;
 	}
 	exports.setOptions = setOptions;
 	// https://github.com/antimatter15/jsgif/blob/master/b64.js

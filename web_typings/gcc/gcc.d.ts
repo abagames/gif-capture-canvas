@@ -13,5 +13,6 @@ declare module 'gcc' {
 		capturingFps?: number;
 		appFps?: number;
 		isAppendingImgElement?: boolean;
+		quality?: number;
 	}
 }

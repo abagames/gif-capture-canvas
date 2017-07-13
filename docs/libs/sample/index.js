@@ -70,7 +70,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	    keyCode: 67,
 	    capturingFps: 20,
 	    appFps: 60,
-	    isAppendingImgElement: true
+	    isAppendingImgElement: true,
+	    quality: 10
 	};
 	var contextsNum;
 	var contexts;
@@ -140,6 +141,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    var encoder = new GIFEncoder();
 	    encoder.setRepeat(0);
 	    encoder.setDelay(1000 / exports.options.capturingFps);
+	    encoder.setQuality(exports.options.quality);
 	    encoder.start();
 	    if (isInfiniteDuration) {
 	        times(index - 1, function (i) {
@@ -1568,7 +1570,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	        keyCode: 67,
 	        capturingFps: 20,
 	        appFps: 60,
-	        isAppendingImgElement: true
+	        isAppendingImgElement: true,
+	        quality: 10
 	    });
 	    x = getRandomInt(256);
 	    y = getRandomInt(256);

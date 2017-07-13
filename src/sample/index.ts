@@ -23,7 +23,8 @@ window.onload = () => {
     keyCode: 67, // 'C'
     capturingFps: 20,
     appFps: 60,
-    isAppendingImgElement: true
+    isAppendingImgElement: true,
+    quality: 10
   });
   x = getRandomInt(256);
   y = getRandomInt(256);

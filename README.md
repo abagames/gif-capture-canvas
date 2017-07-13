@@ -36,7 +36,8 @@ see: [src/sample/index.ts](https://github.com/abagames/gif-capture-canvas/blob/m
     keyCode: 67, // 'C'
     capturingFps: 20,
     appFps: 60,
-    isAppendingImgElement: true
+    isAppendingImgElement: true,
+    quality: 10
   });
 ```
 

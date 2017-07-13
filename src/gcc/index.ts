@@ -7,7 +7,8 @@ export let options = {
   keyCode: 67, // 'C'
   capturingFps: 20,
   appFps: 60,
-  isAppendingImgElement: true
+  isAppendingImgElement: true,
+  quality: 10
 };
 let contextsNum: number;
 let contexts: CanvasRenderingContext2D[];
@@ -79,6 +80,7 @@ export function end() {
   const encoder = new GIFEncoder();
   encoder.setRepeat(0);
   encoder.setDelay(1000 / options.capturingFps);
+  encoder.setQuality(options.quality);
   encoder.start();
   if (isInfiniteDuration) {
     times(index - 1, i => {

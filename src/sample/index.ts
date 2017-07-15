@@ -24,7 +24,8 @@ window.onload = () => {
     capturingFps: 20,
     appFps: 60,
     isAppendingImgElement: true,
-    quality: 10
+    quality: 10,
+    downloadFileName: null
   });
   x = getRandomInt(256);
   y = getRandomInt(256);

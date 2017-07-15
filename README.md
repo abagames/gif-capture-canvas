@@ -37,7 +37,8 @@ see: [src/sample/index.ts](https://github.com/abagames/gif-capture-canvas/blob/m
     capturingFps: 20,
     appFps: 60,
     isAppendingImgElement: true,
-    quality: 10
+    quality: 10,
+    downloadFileName: null
   });
 ```
 

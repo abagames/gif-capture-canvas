@@ -14,5 +14,6 @@ declare module 'gcc' {
 		appFps?: number;
 		isAppendingImgElement?: boolean;
 		quality?: number;
+		downloadFileName?: string;
 	}
 }

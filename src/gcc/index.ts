@@ -8,7 +8,8 @@ export let options = {
   capturingFps: 20,
   appFps: 60,
   isAppendingImgElement: true,
-  quality: 10
+  quality: 10,
+  downloadFileName: null
 };
 let contextsNum: number;
 let contexts: CanvasRenderingContext2D[];
@@ -99,6 +100,10 @@ export function end() {
     });
   }
   encoder.finish();
+  if (options.downloadFileName != null) {
+    encoder.download(options.downloadFileName);
+    return null;
+  }
   const binaryGif = encoder.stream().getData();
   const imgElement = document.createElement('img');
   imgElement.src = 'data:image/gif;base64,' + encode64(binaryGif);

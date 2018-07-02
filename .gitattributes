@@ -1,4 +1,4 @@
-docs/* linguist-documentation
-web_modules/* linguist-vendored
-web_typings/* linguist-vendored
-build/* linguist-generated
+docs/* linguist-documentation=true
+web_modules/* linguist-vendored=true
+web_typings/* linguist-vendored=true
+build/* linguist-generated=true

@@ -2,6 +2,8 @@
   "name": "gif-capture-canvas",
   "version": "1.0.0",
   "description": "Capture a canvas with an animated gif",
+  "main": "build/index.js",
+  "typings": "typings/index.d.ts",
   "devDependencies": {
     "awesome-typescript-loader": "^5.2.0",
     "typescript": "^2.9.2",
@@ -15,5 +17,10 @@
     "build_sample": "webpack --env.sample=lineart"
   },
   "author": "abagames",
-  "license": "MIT"
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/abagames/gif-capture-canvas.git"
+  },
+  "homepage": "https://github.com/abagames/gif-capture-canvas"
 }

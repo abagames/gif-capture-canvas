@@ -1,4 +1,4 @@
-declare module "gcc" {
+declare module "gif-capture-canvas" {
   function capture(element: any);
   function captureSvg(svgElm: any);
   function end(): HTMLImageElement;

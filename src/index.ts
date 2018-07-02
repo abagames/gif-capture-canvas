@@ -1,5 +1,5 @@
 declare const require: any;
-const GIFEncoder = require('jsgif');
+const GIFEncoder = require("jsgif");
 
 export let options = {
   scale: 0.5,
@@ -61,7 +61,7 @@ function begin(element: any) {
     contexts = times(contextsNum, () => createContext(element));
     isCaptured = times(contextsNum, () => false);
   }
-  document.addEventListener('keydown', (e: KeyboardEvent) => {
+  document.addEventListener("keydown", (e: KeyboardEvent) => {
     if (e.keyCode == options.keyCode) {
       end();
     }
@@ -69,10 +69,10 @@ function begin(element: any) {
 }
 
 function createContext(element: any) {
-  const cvs = document.createElement('canvas');
+  const cvs = document.createElement("canvas");
   cvs.width = element.width * options.scale;
   cvs.height = element.height * options.scale;
-  const ctx = cvs.getContext('2d');
+  const ctx = cvs.getContext("2d");
   ctx.scale(options.scale, options.scale);
   return ctx;
 }
@@ -105,10 +105,10 @@ export function end() {
     return null;
   }
   const binaryGif = encoder.stream().getData();
-  const imgElement = document.createElement('img');
-  imgElement.src = 'data:image/gif;base64,' + encode64(binaryGif);
+  const imgElement = document.createElement("img");
+  imgElement.src = "data:image/gif;base64," + encode64(binaryGif);
   if (options.isAppendingImgElement) {
-    document.getElementsByTagName('body')[0].appendChild(imgElement);
+    document.getElementsByTagName("body")[0].appendChild(imgElement);
   }
   return imgElement;
 }
@@ -130,9 +130,17 @@ export function setOptions(_options) {
 
 // https://github.com/antimatter15/jsgif/blob/master/b64.js
 function encode64(input) {
-  var output = "", i = 0, l = input.length,
+  var output = "",
+    i = 0,
+    l = input.length,
     key = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=",
-    chr1, chr2, chr3, enc1, enc2, enc3, enc4;
+    chr1,
+    chr2,
+    chr3,
+    enc1,
+    enc2,
+    enc3,
+    enc4;
   while (i < l) {
     chr1 = input.charCodeAt(i++);
     chr2 = input.charCodeAt(i++);
@@ -143,7 +151,12 @@ function encode64(input) {
     enc4 = chr3 & 63;
     if (isNaN(chr2)) enc3 = enc4 = 64;
     else if (isNaN(chr3)) enc4 = 64;
-    output = output + key.charAt(enc1) + key.charAt(enc2) + key.charAt(enc3) + key.charAt(enc4);
+    output =
+      output +
+      key.charAt(enc1) +
+      key.charAt(enc2) +
+      key.charAt(enc3) +
+      key.charAt(enc4);
   }
   return output;
 }

@@ -1,30 +1,37 @@
-var LiveReloadPlugin = require('webpack-livereload-plugin');
-var glob = require('glob');
+const path = require("path");
 
-module.exports = {
-  entry: {
-    gcc: glob.sync('./src/gcc/**/*.ts'),
-    sample: glob.sync('./src/**/*.ts'),
-  },
-  output: {
-    path: './docs/libs',
-    filename: '[name]/index.js',
-    library: ['[name]'],
-    libraryTarget: 'umd'
-  },
-  resolve: {
-    extensions: ['.ts', '', '.webpack.js', '.web.js', '.js']
-  },
-  module: {
-    loaders: [
-      {
-        test: /\.ts$/,
-        exclude: /(node_modules|web_modules)/,
-        loader: 'ts-loader'
-      }
-    ]
-  },
-  plugins: [
-    new LiveReloadPlugin()
-  ]
+module.exports = function(env) {
+  const config = {
+    mode: process.env.WEBPACK_SERVE ? "development" : "production",
+    resolve: {
+      extensions: [".ts", ".js"],
+      modules: ["node_modules", "web_modules"]
+    },
+    module: {
+      rules: [
+        {
+          test: /\.ts$/,
+          exclude: /(node_modules|web_modules)/,
+          loader: "awesome-typescript-loader"
+        }
+      ]
+    }
+  };
+  if (env == null || env.sample == null) {
+    config.entry = "./src/index.ts";
+    config.output = {
+      path: path.join(__dirname, "build"),
+      filename: "index.js",
+      library: ["gcc"],
+      libraryTarget: "umd"
+    };
+  } else {
+    var sample = env.sample;
+    config.entry = "./src/samples/" + sample + ".ts";
+    config.output = {
+      path: path.join(__dirname, "docs"),
+      filename: sample + ".js"
+    };
+  }
+  return config;
 };

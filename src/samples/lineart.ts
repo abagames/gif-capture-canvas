@@ -1,4 +1,4 @@
-import * as gcc from '../gcc/index';
+import * as gcc from '../index';
 
 let canvas: HTMLCanvasElement;
 let context: CanvasRenderingContext2D;

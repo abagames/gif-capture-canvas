@@ -1,16 +1,25 @@
-﻿<!DOCTYPE html>
+﻿<!doctype html>
 <html>
 
 <head>
-	<title>gif-capture-canvas sample</title>
+	<meta name="viewport" content="width=device-width, height=device-height,
+  user-scalable=no, initial-scale=1, maximum-scale=1">
+	<title>gif-capture-canvas</title>
+	<link rel="stylesheet" href="index.css" type="text/css" />
 </head>
 
 <body>
+	<script>
+		var defaultSampleName = 'lineart';
+		var sampleName = window.location.search.substring(1);
+		sampleName = sampleName.replace(/\W/g, '');
+		if (sampleName.length <= 0) {
+			sampleName = defaultSampleName;
+		}
+		document.title = "gif-capture-canvas demo - " + sampleName;
+		var script = document.createElement('script');
+		script.src = sampleName + '.js';
+		document.body.appendChild(script);
+	</script>
 	<p>Push [C] to capture</p>
-	<script src="libs/sample/index.js"></script>
-	<!--
-	<script src="http://localhost:35729/livereload.js"></script>
-	-->
 </body>
-
-</html>

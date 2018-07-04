@@ -1,7 +1,7 @@
 declare const require: any;
 const GIFEncoder = require("jsgif");
 
-export let options = {
+export let options: Options = {
   scale: 0.5,
   durationSec: 3,
   keyCode: 67, // 'C'
@@ -121,7 +121,7 @@ function times(n: number, func: Function) {
   return result;
 }
 
-export function setOptions(_options) {
+export function setOptions(_options: Options) {
   for (let attr in _options) {
     options[attr] = _options[attr];
   }
@@ -159,4 +159,15 @@ function encode64(input) {
       key.charAt(enc4);
   }
   return output;
+}
+
+export interface Options {
+  scale?: number;
+  durationSec?: number;
+  keyCode?: number;
+  capturingFps?: number;
+  appFps?: number;
+  isAppendingImgElement?: boolean;
+  quality?: number;
+  downloadFileName?: string;
 }

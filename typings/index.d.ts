@@ -1,12 +1,9 @@
-declare module "gif-capture-canvas" {
-  function capture(element: any);
-  function captureSvg(svgElm: any);
-  function end(): HTMLImageElement;
-  function setOptions(_options: Options);
-
-  export let options: Options;
-
-  interface Options {
+export declare let options: Options;
+export declare function capture(element: any): void;
+export declare function captureSvg(svgElm: any): void;
+export declare function end(): HTMLImageElement;
+export declare function setOptions(_options: Options): void;
+export interface Options {
     scale?: number;
     durationSec?: number;
     keyCode?: number;
@@ -15,5 +12,4 @@ declare module "gif-capture-canvas" {
     isAppendingImgElement?: boolean;
     quality?: number;
     downloadFileName?: string;
-  }
 }

@@ -4,7 +4,7 @@ Capture a canvas with an animated gif (using [jsgif](https://github.com/antimatt
 
 [Demo](https://abagames.github.io/gif-capture-canvas/index.html?lineart)
 
-[![demo](https://abagames.github.io/gif-capture-canvas/demo.gif)]](https://abagames.github.io/gif-capture-canvas/index.html?lineart)
+[![demo](https://abagames.github.io/gif-capture-canvas/demo.gif)](https://abagames.github.io/gif-capture-canvas/index.html?lineart)
 
 ### Usage
 

@@ -27,6 +27,9 @@ window.onload = () => {
     quality: 10,
     downloadFileName: null
   });
+  const p = document.createElement('p');
+  p.innerText = 'Push [C] to capture';
+  document.body.appendChild(p);
   x = getRandomInt(256);
   y = getRandomInt(256);
   mvx = (Math.random() + 2) * (getRandomInt(2) * 2 - 1);

@@ -1,6 +1,6 @@
 {
   "name": "gif-capture-canvas",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Capture a canvas with an animated gif",
   "main": "build/index.js",
   "typings": "typings/index.d.ts",

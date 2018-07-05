@@ -11,7 +11,7 @@ Capture a canvas with an animated gif (using [jsgif](https://github.com/antimatt
 - Include [build/index.js](https://github.com/abagames/gif-capture-canvas/blob/master/build/index.js) script or install from npm.
 
 ```
-% npm install gif-capture-canvas
+% npm i gif-capture-canvas
 ```
 
 - Capture HTMLCanvasElement in a requestAnimationFrame loop.

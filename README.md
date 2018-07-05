@@ -1,8 +1,10 @@
-# gif-capture-canvas ([Demo](https://abagames.github.io/gif-capture-canvas/index.html?lineart))
+# gif-capture-canvas
 
 Capture a canvas with an animated gif (using [jsgif](https://github.com/antimatter15/jsgif)).
 
-![demo](https://abagames.github.io/gif-capture-canvas/demo.gif)
+[Demo](https://abagames.github.io/gif-capture-canvas/index.html?lineart)
+
+[![demo](https://abagames.github.io/gif-capture-canvas/demo.gif)]](https://abagames.github.io/gif-capture-canvas/index.html?lineart)
 
 ### Usage
 
@@ -12,7 +14,7 @@ Capture a canvas with an animated gif (using [jsgif](https://github.com/antimatt
 % npm install gif-capture-canvas
 ```
 
-- Capture HTMLCanvasElement.
+- Capture HTMLCanvasElement in a requestAnimationFrame loop.
 
 see: [src/samples/lineart.ts](https://github.com/abagames/gif-capture-canvas/blob/master/src/samples/lineart.ts)
 

@@ -9,7 +9,8 @@ export let options: Options = {
   appFps: 60,
   isAppendingImgElement: true,
   quality: 10,
-  downloadFileName: null
+  downloadFileName: null,
+  isSmoothingEnabled: true
 };
 let contextsNum: number;
 let contexts: CanvasRenderingContext2D[];
@@ -73,6 +74,7 @@ function createContext(element: any) {
   cvs.width = element.width * options.scale;
   cvs.height = element.height * options.scale;
   const ctx = cvs.getContext("2d");
+  ctx.imageSmoothingEnabled = options.isSmoothingEnabled;
   ctx.scale(options.scale, options.scale);
   return ctx;
 }
@@ -170,4 +172,5 @@ export interface Options {
   isAppendingImgElement?: boolean;
   quality?: number;
   downloadFileName?: string;
+  isSmoothingEnabled?: boolean;
 }

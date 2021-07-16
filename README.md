@@ -38,6 +38,6 @@ gcc.setOptions({
   isAppendingImgElement: true,
   quality: 10,
   downloadFileName: null,
-  isSmoothingEnabled: false
+  isSmoothingEnabled: true
 });
 ```

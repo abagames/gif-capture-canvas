@@ -37,6 +37,7 @@ gcc.setOptions({
   appFps: 60,
   isAppendingImgElement: true,
   quality: 10,
-  downloadFileName: null
+  downloadFileName: null,
+  isSmoothingEnabled: false
 });
 ```

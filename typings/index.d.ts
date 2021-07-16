@@ -12,4 +12,5 @@ export interface Options {
     isAppendingImgElement?: boolean;
     quality?: number;
     downloadFileName?: string;
+    isSmoothingEnabled?: boolean;
 }
